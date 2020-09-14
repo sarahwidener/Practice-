@@ -1,41 +1,78 @@
----
-title: "HW2"
-author: "Widener"
-date: "9/11/2020"
-output: html_document
----
+#LISTS A COMPEX DATA STRUCTURE. Retosic structure - stores different types of functions double brackets to get to list single demension. Double brackets to get a specific value.
+vector
+A<- c(7,5,3,6,9,4)
+B<- c(2,5,6,4,8,3)
+C<- c(4,5,2,1,8,3)
+storequantity <- rbind(A,B,C)
+quantity <- list(A,storequantity)
+quantity
+#naming
+basket_details <- list(store='store_a',product=c('apple','coockie'),price=c(2.3, 2))
+basket_details
+quantity[[1]][1]
+#two options $ and [[]]
+basket_details[['price']]
+basket_details$price
+#to select element in list [# position]
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
+#data frames - list where all components have names and are the same leangths R1=header each row is a observation acrosed variables. Same properties at matricied. 2 dementional. Have a class of dataframe.
+things <- c('apples', 'pears', 'lemmons', 'cookie', 'orange', 'banana')
+shopping_data <- data.frame(things, A,B,C)
+#print out graphs
+View(shopping_data)
+#changing vector names
+x=item
+shopping_data <- data.frame(item=things, aldi=A,walmart=B,caseys=C, stringsAsFactors=FALSE)
+#importing spreadsheet
 
-## R Markdown
+> key_crop_yields <- read.csv("~/Downloads/key_crop_yields.csv")
+>   View(key_crop_yields)
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+#looking at data
+names(shopping_data)
+dim(shopping_data)
+head(shopping_data, n=3)
+tail(shopping_data, n=4)
+str(shopping_data)
+shopping_data[1,1]
+stringasfactors=F
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+class(shopping_data)
+typeof(shopping_data)
+#gives mean, median, morde, range, quartiles
+summary(shopping_data)
 
-```{r cars}
-summary(cars)
-```
+#manipulationg data frames
+#list subsets [[]]=vector []= 
+shopping_data[1,"aldi"]
 
-## Including Plots
+newjunk <- c('fruit','acidic','high_sugar','round','weirdshaped','yellow')
+shopping_data <- cbind(shopping_data,newjunk)
 
-You can also embed plots, for example:
+#adding a new row
+newproduct <- data.frame(item='brownie', aldi=4, walmart=5, caseys=5)
+shopping_data <- rbind(shopping_data,newproduct)
+view(newproduct)
 
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
+#All responses should be included as R chunks in an R Markdown document and saved at the same repository used for homework 2.
 
-a) show the step-by-step how to solve the following system of equations in R (Use R chunks to run each part).
-5->y
-4->x
-(2*x)+(5*y)==33
-x+(3*y)==19
+#1) Write a function to calculate the mean.
+calculate_mean <- function(vector_of_numbers){
+  return(mean(vector_of_numbers))
+}
+v <- c(4,12,19)
+calculate_mean(v)
 
-b) create a vector that goes from 1 to 100 and calculates the average of it WITHOUT using the R function “mean”.
-n->number
-x=runif(n)+1
-“dplyr"
+#2) The range (first and last) of the variable Year.
+key_crop_yields <- read.csv("~/Downloads/key_crop_yields.csv")
+min(key_crop_yields[ ,3])
+max(key_crop_yields[ ,3])
+#1961-2018
 
-x <- list(a = list(“10”, 12, 14), b = c(3.14, 2.81))
+#3) Using the function from #1, calculate the mean of the variable "Maize (tonnes per hectare)".  TIP: When there is missing data (NA), the functions mean, sum, and others, will result in NA. The solution to obtain the desired result is either remove all NAs or use the option na.rm = TRUE (see "?sum").
+na.rm=TRUE
+key_crop_yields['Maize (tonnes per hectare)']
+str(key_crop_yields)
+mean(key_crop_yields$Maize..tonnes.per.hectare., na.rm = TRUE)
+
+#4) Save a file with the variable named "Entity".
